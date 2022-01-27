@@ -9,9 +9,5 @@ def post_list(request):
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
-    try:
-        post = Post.objects.get(pk=pk)
-    except Post.DoesNotExist:
-        render(request, 'blog/404.html', {'pk': pk})
-    else:
-        return render(request, 'blog/post_detail.html', {'post': post})
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
